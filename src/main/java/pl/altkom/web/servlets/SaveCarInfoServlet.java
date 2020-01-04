@@ -25,6 +25,7 @@ public class SaveCarInfoServlet extends HttpServlet {
         CarBean car = (CarBean) req.getSession().getAttribute("autko");
         CarInfoDAO dao = new CarInfoDAOImpl();
         dao.saveCarInfo(car, dataSource);
+        req.getSession().removeAttribute("autko");
 
         req.getRequestDispatcher("redirect").forward(req, resp);
     }
