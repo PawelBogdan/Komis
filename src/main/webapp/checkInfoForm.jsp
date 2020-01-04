@@ -36,7 +36,9 @@
         <td><jsp:getProperty name="autko" property="capacity"/></td>
     </tr>
 </table>
-
+<form action="carInfoForm.jsp">
+    <input type="submit" value="Edytuj">
+</form>
 <form action="add_car_info">
     <input type="submit" value="Zapisz samochód">
 </form>
