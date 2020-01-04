@@ -1,6 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Arrays" %>
 <%@ page import="pl.altkom.web.CarBean" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -8,15 +9,12 @@
 </head>
 <body>
 
-<%!
-    List<String> makes = Arrays.asList("Fiat", "Volkswagen",
-            "Ford", "Volvo", "Honda", "Citroen");
-%>
+<c:set var="makes" value="Fiat,Volkswagen,Ford,Volvo,Honda,Citroen"/>
 
 <jsp:useBean id="autko" class="pl.altkom.web.CarBean" scope="session">
     <% autko.setType(""); %>
     <% autko.setYear(2019); %>
-    <% autko.setMake(makes.get(0)); %>
+<%--    <% autko.setMake(makes.get(0)); %>--%>
     <% autko.setCapacity("1"); %>
     <% autko.setDistance("0"); %>
 </jsp:useBean>
@@ -26,17 +24,20 @@
 <form action="checkInfoForm.jsp" method="post">
     Marka
     <select name="make">
-        <% for (String m : makes) { %>
-            <% if (m.equals(car.getMake())) {%>
-                <option selected="selected"><%=m%></option>
-            <% } else { %>
-                <option><%=m%></option>
-            <% } %>
-        <% } %>
+        <c:forEach var="m" items="${makes}">
+            <c:choose>
+                <c:when test="${m eq autko.make}">
+                    <option selected="selected"> <c:out value="${m}"/> </option>
+                </c:when>
+                <c:otherwise>
+                    <option> <c:out value="${m}"/> </option>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
     </select>
     <br>
     Typ
-    <input type="text" name="type" value="<jsp:getProperty name="autko" property="type"/>"> <br>
+    <input type="text" name="type" value="<c:out value='${autko.type}'/>"/> <br>
     Rok produkcji
     <select name="year">
         <%for (int i = 2019; i >= 1980; i--) { %>
