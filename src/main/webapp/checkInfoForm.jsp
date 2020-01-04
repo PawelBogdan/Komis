@@ -22,7 +22,7 @@
     </tr>
     <tr>
         <td>Typ</td>
-        <td><c:out value="${autko.type}"/></td>
+        <td><jsp:getProperty name="autko" property="type"/></td>
     </tr>
     <tr>
         <td>Rok produkcji</td>
