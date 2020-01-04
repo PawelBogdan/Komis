@@ -28,7 +28,10 @@
         <td><c:out value="${item.rok}"/></td>
         <td><c:out value="${item.przebieg}"/></td>
         <td><c:out value="${item.pojemnosc}"/></td>
-        <td><form><input type="submit" value="Edytuj"></form></td>
+        <td><form action="find_car_by_id">
+            <input type="hidden" name="car_id" value="<c:out value='${item.id}'/>">
+            <input type="submit" value="Edytuj">
+        </form></td>
     </tr>
 </c:forEach>
 </table>
